@@ -1,5 +1,6 @@
 package com.example.employeesource.repository;
 
+import com.example.employeesource.entity.EmployeeData;
 import com.example.employeesource.entity.LegacyEmployee;
 
 import jakarta.transaction.Transactional;
@@ -32,5 +33,7 @@ public interface LegacyEmployeeRepository extends JpaRepository<LegacyEmployee, 
 			WHERE id = :employeeId
 			""", nativeQuery = true)
 	void updateEmployeeFlagToProcessed(Long employeeId);
+	
+	public LegacyEmployee getByEmail(String email);
 
 }
