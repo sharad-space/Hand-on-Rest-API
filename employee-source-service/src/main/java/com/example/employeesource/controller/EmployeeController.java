@@ -3,10 +3,7 @@ package com.example.employeesource.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.employeesource.dto.EmployeeDataRequestDTO;
 import com.example.employeesource.entity.EmployeeData;
@@ -47,9 +44,15 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/send-Message")
-	public String sendMessage() throws Exception {
+	public String sendMessageto() throws Exception {
 
 		return "Data sent successfully";
+	}
+
+	@GetMapping("/send")
+	public String sendMessagetoapi() throws Exception {
+
+		return "Data sent successfully to database";
 	}
 
 }
