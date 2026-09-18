@@ -40,4 +40,10 @@ public class EmployeeController {
 		return ResponseEntity.ok(savedEmployees);
 	}
 
+	@PostMapping("/send-Message")
+	public String sendMessage() throws Exception {
+
+		return "Data sent successfully";
+	}
+
 }
