@@ -43,7 +43,7 @@ public class EmployeeController {
 	@PostMapping("/send-Message")
 	public String sendMessage() throws Exception {
 
-		return "Data sent successfully";
+		return "Data sent successfully to REST API";
 	}
 
 }
