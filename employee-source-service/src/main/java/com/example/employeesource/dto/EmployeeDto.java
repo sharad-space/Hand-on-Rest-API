@@ -1,6 +1,7 @@
 package com.example.employeesource.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -33,6 +34,8 @@ public class EmployeeDto {
     @NotNull(message = "Salary cannot be null")
     private BigDecimal salary;
 
+    @NotNull
+    @Column(nullable = false,length = 15)
     private String phoneNumber;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
