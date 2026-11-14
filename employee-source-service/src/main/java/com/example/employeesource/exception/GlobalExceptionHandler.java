@@ -1,5 +1,9 @@
 package com.example.employeesource.exception;
 
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -7,12 +11,16 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
+import com.example.employeesource.dto.ExternalTransactionRequestDto;
+import com.example.employeesource.service.ExternalTransactionService;
+
+import lombok.RequiredArgsConstructor;
 
 @RestControllerAdvice
+@RequiredArgsConstructor
 public class GlobalExceptionHandler {
+
+    private final ExternalTransactionService externalTransactionService;
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<Map<String, Object>> handleResourceNotFound(ResourceNotFoundException ex) {
@@ -32,6 +40,17 @@ public class GlobalExceptionHandler {
             String message = error.getDefaultMessage();
             errors.put(fieldName, message);
         });
+
+        Object target = ex.getBindingResult().getTarget();
+        if (target instanceof ExternalTransactionRequestDto dto) {
+            externalTransactionService.logFailureAudit(
+                    dto.getRequestId(),
+                    dto.getSourceSystem(),
+                    dto.getEventType(),
+                    dto,
+                    "Validation failed: " + errors
+            );
+        }
 
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());
