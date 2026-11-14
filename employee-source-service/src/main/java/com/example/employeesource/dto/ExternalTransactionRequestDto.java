@@ -7,11 +7,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -73,6 +69,7 @@ public class ExternalTransactionRequestDto {
         private String currency;
 
         @NotNull(message = "totalAmount is required")
+        @DecimalMin(value = "0.01", message = "totalAmount must be greater than 0")
         private BigDecimal totalAmount;
 
         @NotBlank(message = "status is required")
@@ -107,12 +104,17 @@ public class ExternalTransactionRequestDto {
         private String description;
 
         @NotNull(message = "quantity is required")
+        @Min(value = 1, message = "quantity must be greater than 0")
+        @Positive(message = "quantity must be a positive integer")
         private Integer quantity;
 
         @NotNull(message = "unitPrice is required")
+        @DecimalMin(value = "0.01", message = "unitPrice must be greater than 0")
+        @Positive(message = "unitPrice must be a positive number")
         private BigDecimal unitPrice;
 
         @NotNull(message = "totalPrice is required")
+        @DecimalMin(value = "0.01", message = "totalPrice must be greater than 0")
         private BigDecimal totalPrice;
     }
 
@@ -130,6 +132,7 @@ public class ExternalTransactionRequestDto {
         private String paymentReference;
 
         @NotNull(message = "amount is required")
+        @DecimalMin(value = "0.01", message = "amount must be greater than 0")
         private BigDecimal amount;
 
         @NotBlank(message = "paymentStatus is required")

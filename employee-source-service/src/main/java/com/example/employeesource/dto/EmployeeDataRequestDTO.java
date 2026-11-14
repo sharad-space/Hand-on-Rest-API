@@ -17,7 +17,6 @@ public class EmployeeDataRequestDTO {
     private String name;
 
     @Column(nullable = false, unique = true)
-    @NotNull(message = "Email cannot be null")
     private String email;
 
     @Column(nullable = false)
