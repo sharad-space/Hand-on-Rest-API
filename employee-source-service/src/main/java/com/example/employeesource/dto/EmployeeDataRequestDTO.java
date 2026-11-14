@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 
@@ -12,9 +13,11 @@ public class EmployeeDataRequestDTO {
 	
 
     @Column(nullable = false)
+    @NotNull(message = "Name cannot be null")
     private String name;
 
     @Column(nullable = false, unique = true)
+    @NotNull(message = "Email cannot be null")
     private String email;
 
     @Column(nullable = false)
