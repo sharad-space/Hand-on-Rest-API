@@ -25,6 +25,7 @@ public class EmployeeDataRequestDTO {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal salary;
 
+    @Column(nullable = false,length = 10)
     private String phoneNumber;
 
     @Column(nullable = false)
