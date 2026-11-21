@@ -35,7 +35,7 @@ public class EmployeeDto {
     private BigDecimal salary;
 
     @NotNull
-    @Column(nullable = false,length = 15)
+    @Column(nullable = false,length = 20)
     private String phoneNumber;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
